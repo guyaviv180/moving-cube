@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script src="graphics.js"></script>
+    <canvas id="myCanvas" width="600" height="300" style="background-color:lightblue"></canvas>
+    <script>
+        var cubeWidth = 50;
+        var cubeHeight = 50;
+        var cubeX = 0;
+        var cubeY = document.getElementById("myCanvas").height - cubeHeight;
+
+        var D = false;
+        var A = false;
+        var W = false;
+        var S = false;
+
+        window.onload = function () {
+            canvas = document.getElementById("myCanvas");
+            context = canvas.getContext("2d");
+            var fps = 30;
+            setInterval(function () {
+                moveCube()
+                draw()
+            }, 1000/fps)
+            addEventListener("keyDown", onKeyDown);
+            addEventListener("keyUp", onKeyUp);
+            addEventListener("keydown", onKeyDown);
+            addEventListener("keyup", onKeyUp);
+        }
+
+        function moveCube() {
+            if (D) { cubeX += 10; }
+            if (A) { cubeX -= 10; }
+            if (W) { cubeY -= 10; }
+            if (S) { cubeY += 10; }
+        }
+
+        function onKeyDown(event) {
+            var keyCode = event.keyCode;
+            switch (keyCode) {
+                case 68:
+                    D = true;
+                    break;
+                case 65:
+                    A = true;
+                    break;
+                case 87:
+                    W = true;
+                    break;
+                case 83:
+                    S = true;
+                    break;
+            }
+        }
+
+        function onKeyUp(event) {
+            var keyCode = event.keyCode;
+            switch (keyCode) {
+                case 68:
+                    D = false;
+                    break;
+                case 65:
+                    A = false;
+                    break;
+                case 87:
+                    W = false;
+                    break;
+                case 83:
+                    S = false;
+                    break;
+            }
+        }
+        function draw() {
+            drawRectangle(0, 0, canvas.width, canvas.height, "lightblue");
+            drawRectangle(cubeX, cubeY, cubeWidth, cubeHeight);
+        }
+    </script>
+</body>
+</html>
